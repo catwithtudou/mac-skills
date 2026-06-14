@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "maccli"
+version = "0.1.0"
+description = "Local-first macOS app CLI used by mac-skills."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "mac-skills contributors" }]
+dependencies = []
+
+[project.scripts]
+maccli = "maccli.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

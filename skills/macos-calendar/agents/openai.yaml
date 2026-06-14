@@ -1,0 +1,4 @@
+interface:
+  display_name: "macOS Calendar"
+  short_description: "Read and manage Apple Calendar events"
+  default_prompt: "Use $macos-calendar to inspect or safely update my Apple Calendar."

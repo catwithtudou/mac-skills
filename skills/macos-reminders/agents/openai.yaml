@@ -1,0 +1,4 @@
+interface:
+  display_name: "macOS Reminders"
+  short_description: "Read and manage Apple Reminders safely"
+  default_prompt: "Use $macos-reminders to create or update a reminder after confirming the details."
