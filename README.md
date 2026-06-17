@@ -69,6 +69,18 @@ maccli reminders doctor --probe
 
 Most users should install the skills first. Use `maccli` directly when developing this repository, debugging permissions, or manually verifying the local execution layer.
 
+## Development Checks
+
+Run these before publishing changes:
+
+```bash
+python3 -m compileall src scripts
+PYTHONPATH=src python3 -m unittest discover -s tests
+python3 scripts/validate_skills.py skills
+PYTHONPATH=src python3 -m maccli --help
+npx -y --registry=https://registry.npmjs.org skills@latest add ./ --list
+```
+
 ## TODO
 
 - Add optional scripts only when they make agent behavior safer, clearer, or more repeatable.

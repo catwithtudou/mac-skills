@@ -5,7 +5,9 @@
 This repository is a lightweight macOS skill collection for AI agents.
 
 - `README.md` explains the project scope, install path, and roadmap.
+- `.github/workflows/ci.yml` runs cross-platform validation on push and pull request.
 - `src/maccli/` contains the shared Python CLI execution layer.
+- `scripts/validate_skills.py` validates skill folder structure for local checks and CI.
 - `skills/macos-calendar/` contains the Apple Calendar skill.
 - `skills/macos-reminders/` contains the Apple Reminders skill.
 - `skills/macos-notes/` contains the Apple Notes skill.
@@ -24,7 +26,8 @@ Use these checks before submitting changes:
 - `git diff -- README.md AGENTS.md pyproject.toml src/ skills/` reviews CLI, skill, and documentation edits.
 - `git log --oneline -n 5` checks recent commit style.
 - `python3 -m pip install -e .` installs the local `maccli` console command for development.
-- `python3 -m compileall src` checks Python syntax.
+- `python3 -m compileall src scripts` checks Python syntax.
+- `python3 scripts/validate_skills.py skills` validates all skill folders.
 - `maccli --help` verifies the CLI entrypoint.
 - `maccli calendar doctor` checks local macOS Calendar tooling.
 - `maccli reminders doctor --probe` checks local Reminders access.

@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+
+      - name: Check Python syntax
+        run: python -m compileall src scripts
+
+      - name: Run unit tests
+        run: python -m unittest discover -s tests
+        env:
+          PYTHONPATH: src
+
+      - name: Validate skill folders
+        run: python scripts/validate_skills.py skills
+
+      - name: Verify CLI entrypoint
+        run: python -m maccli --help
+        env:
+          PYTHONPATH: src
+
+      - name: Verify skills packaging
+        run: npx -y --registry=https://registry.npmjs.org skills@latest add ./ --list
