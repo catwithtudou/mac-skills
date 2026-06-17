@@ -1,0 +1,4 @@
+interface:
+  display_name: "macOS Notes"
+  short_description: "Work with Apple Notes safely"
+  default_prompt: "Use $macos-notes to read or safely prepare Apple Notes changes."
