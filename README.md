@@ -13,13 +13,27 @@ Local-first macOS skills for AI coding agents.
 
 ## Install Skills
 
-Install from GitHub:
+Install the stable `v0.1.0` release from GitHub:
+
+```bash
+npx skills add git@github.com:catwithtudou/mac-skills.git#v0.1.0
+```
+
+Use the HTTPS URL if SSH is not configured:
+
+```bash
+npx skills add https://github.com/catwithtudou/mac-skills.git#v0.1.0
+```
+
+The `v0.1.0` release includes `macos-calendar`, `macos-reminders`, `macos-notes`, `macos-permissions`, and the optional Calendar/Reminders `maccli` execution layer.
+
+Install the development version from `main`:
 
 ```bash
 npx skills add git@github.com:catwithtudou/mac-skills.git
 ```
 
-Use the HTTPS URL if SSH is not configured:
+Or use HTTPS for `main`:
 
 ```bash
 npx skills add https://github.com/catwithtudou/mac-skills.git
