@@ -1,5 +1,7 @@
 # mac-skills
 
+![mac-skills cover](assets/mac-skills-cover.png)
+
 Local-first macOS skills for AI coding agents.
 
 `mac-skills` teaches agents how to work with macOS apps and local workflows through lightweight, auditable, permission-aware skills. The goal is not to collect random AppleScript snippets; the goal is to define reusable operation patterns that agents can follow safely.
