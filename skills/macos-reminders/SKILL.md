@@ -34,7 +34,7 @@ python3 "$HOME/.codex/skills/macos-reminders/scripts/read_reminders.py" lists
 2. Use narrow reads: `today --max 20`, `overdue --max 20`, `todos --list <name> --max 20`, or `search <query> --max 20`.
 3. Prefer list IDs and reminder IDs for writes. Names are acceptable for one-off reads.
 4. Include body, due, flagged, or remind fields only when needed.
-5. Treat timeouts and authorization errors as permission or performance issues, not empty data.
+5. Treat timeouts and authorization errors as permission or performance issues, not empty data. Use `$macos-permissions` for TCC, Automation, or timeout troubleshooting.
 
 ## Write Safety
 

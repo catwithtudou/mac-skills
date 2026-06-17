@@ -8,6 +8,7 @@ This repository is a lightweight macOS skill collection for AI agents.
 - `src/maccli/` contains the shared Python CLI execution layer.
 - `skills/macos-calendar/` contains the Apple Calendar skill.
 - `skills/macos-reminders/` contains the Apple Reminders skill.
+- `skills/macos-permissions/` contains the macOS permissions troubleshooting skill.
 - `skills/<name>/SKILL.md` is the required entrypoint for each skill.
 - `skills/<name>/scripts/` holds optional executable helpers.
 - `skills/<name>/agents/openai.yaml` stores UI-facing skill metadata when present.

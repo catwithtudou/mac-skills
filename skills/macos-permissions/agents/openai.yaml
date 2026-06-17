@@ -1,0 +1,4 @@
+interface:
+  display_name: "macOS Permissions"
+  short_description: "Diagnose macOS app permission issues"
+  default_prompt: "Use $macos-permissions to diagnose this macOS app permission or timeout issue."

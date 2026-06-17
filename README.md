@@ -8,6 +8,7 @@ Local-first macOS skills for AI coding agents.
 
 - `macos-calendar` - Read, create, update, and delete Apple Calendar events through a guarded `accli` wrapper.
 - `macos-reminders` - Read, create, update, complete, move, and delete Apple Reminders through guarded `osascript` automation.
+- `macos-permissions` - Diagnose macOS app permission, TCC, Automation, and timeout issues.
 
 ## Install Skills
 
@@ -40,6 +41,7 @@ After installation, invoke the skills from an agent prompt, for example:
 ```text
 Use $macos-calendar to check my calendar tomorrow.
 Use $macos-reminders to create a reminder after confirming the details.
+Use $macos-permissions to troubleshoot a macOS permission or timeout issue.
 ```
 
 For active development, a direct symlink into your agent's skill directory is also acceptable. The `skills` CLI is preferred for normal installation because it can install to supported agent directories consistently.
@@ -67,5 +69,5 @@ Most users should install the skills first. Use `maccli` directly when developin
 
 ## TODO
 
-- Add `macos-notes` and `macos-permissions`.
+- Add `macos-notes`.
 - Add optional scripts only when they make agent behavior safer, clearer, or more repeatable.

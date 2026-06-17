@@ -33,7 +33,7 @@ python3 "$HOME/.codex/skills/macos-calendar/scripts/read_calendar.py" calendars
 1. Run `maccli calendar calendars` to discover calendar names and persistent IDs.
 2. Query the smallest useful date range. Do not dump broad calendar history.
 3. Prefer persistent calendar IDs when output provides them; names are acceptable for one-off reads.
-4. Treat permission failures as permission problems, not as empty calendars.
+4. Treat permission failures as permission problems, not as empty calendars. Use `$macos-permissions` for TCC, authorization, or timeout troubleshooting.
 5. Report times with local timezone context when it affects the user's decision.
 
 ## Write Safety
