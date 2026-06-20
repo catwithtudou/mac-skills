@@ -2,17 +2,18 @@ from __future__ import annotations
 
 import sys
 
-from . import calendar, reminders
+from . import calendar, notes, reminders
 
 
-HELP = """usage: maccli [-h] {calendar,reminders} ...
+HELP = """usage: maccli [-h] {calendar,reminders,notes} ...
 
 Local-first macOS app CLI for AI agent skills.
 
 positional arguments:
-  {calendar,reminders}
+  {calendar,reminders,notes}
     calendar            Work with Apple Calendar
     reminders           Work with Apple Reminders
+    notes               Work with Apple Notes
 
 options:
   -h, --help            show this help message and exit
@@ -30,6 +31,8 @@ def main(argv: list[str] | None = None) -> int:
         return calendar.main(app_args)
     if app == "reminders":
         return reminders.main(app_args)
+    if app == "notes":
+        return notes.main(app_args)
 
     print(f"maccli: unknown app: {app}", file=sys.stderr)
     print("Run 'maccli --help' for usage.", file=sys.stderr)
