@@ -93,7 +93,7 @@ For active development, a direct symlink into your agent's skill directory is al
 For reproducible installation, pin a release tag:
 
 ```bash
-npx -y skills@latest add https://github.com/catwithtudou/mac-skills.git#v0.1.0
+npx -y skills@latest add https://github.com/catwithtudou/mac-skills.git#v0.2.0
 ```
 
 Use this when you want a stable, repeatable setup instead of tracking the repository default branch.
