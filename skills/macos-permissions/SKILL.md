@@ -12,6 +12,7 @@ Use this skill when a macOS app workflow fails, times out, or returns suspicious
 ```bash
 maccli calendar doctor
 maccli reminders doctor --probe
+maccli notes doctor --probe
 ```
 
 This skill does not grant permissions or modify System Settings. It explains what to check and how to report the failure.
