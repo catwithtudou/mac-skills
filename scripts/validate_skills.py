@@ -12,7 +12,7 @@ from pathlib import Path
 MAX_DESCRIPTION_LENGTH = 1024
 MAX_SKILL_NAME_LENGTH = 64
 MAX_SKILL_LINES = 100
-ALLOWED_FRONTMATTER_KEYS = {"name", "description", "license", "allowed-tools", "metadata"}
+ALLOWED_FRONTMATTER_KEYS = {"name", "version", "description", "license", "allowed-tools", "metadata"}
 TEMPLATE_MARKERS = ("[TODO", "Structuring This Skill", "Not every skill requires")
 
 
@@ -72,6 +72,7 @@ def validate_skill(skill_path: Path) -> list[str]:
         errors.append(f"Unexpected frontmatter key(s): {', '.join(sorted(unexpected))}")
 
     name = frontmatter.get("name", "").strip()
+    version = frontmatter.get("version", "").strip()
     description = frontmatter.get("description", "").strip()
     if not name:
         errors.append("Missing required frontmatter key: name")
@@ -87,6 +88,9 @@ def validate_skill(skill_path: Path) -> list[str]:
             errors.append(f"Name '{name}' cannot start/end with hyphen or contain consecutive hyphens")
         if len(name) > MAX_SKILL_NAME_LENGTH:
             errors.append(f"Name is too long: {len(name)} > {MAX_SKILL_NAME_LENGTH}")
+
+    if version and not re.fullmatch(r"\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?", version):
+        errors.append(f"Version '{version}' must use semver, for example 1.2.3")
 
     if description:
         if "Use when" not in description:

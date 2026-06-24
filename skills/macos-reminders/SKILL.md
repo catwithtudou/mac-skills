@@ -1,5 +1,6 @@
 ---
 name: macos-reminders
+version: 0.2.1
 description: Read and safely manage local Apple Reminders data on macOS using maccli osascript automation. Use when an AI agent needs to inspect reminder lists, list todos, search reminders, create reminders, update reminders, complete or uncomplete reminders, move reminders between lists, delete reminders, or troubleshoot Reminders permission access.
 ---
 

@@ -1,5 +1,6 @@
 ---
 name: macos-calendar
+version: 0.2.1
 description: Read and safely manage local Apple Calendar data on macOS using the accli-backed maccli command surface. Use when an AI agent needs to inspect calendars, list events, read one event, check free/busy time, create events, update events, delete events, or troubleshoot Calendar permission access.
 ---
 

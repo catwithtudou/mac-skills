@@ -1,5 +1,6 @@
 ---
 name: macos-permissions
+version: 0.2.1
 description: Diagnose and explain macOS local app permissions for agent workflows, including TCC, Automation, Calendar, Reminders, Notes, Accessibility, and Full Disk Access. Use when an AI agent sees permission errors, authorization prompts, timeouts, empty-looking results that may be permission failures, or needs to explain safe recovery steps for macOS app access.
 ---
 
