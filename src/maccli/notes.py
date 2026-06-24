@@ -14,7 +14,7 @@ from typing import Any
 
 
 PERMISSION_HINT = (
-    "Grant Automation/Notes access to the terminal or Codex app in "
+    "Grant Automation/Notes access to the terminal or AI agent app in "
     "System Settings > Privacy & Security, then retry."
 )
 DEFAULT_READ_TIMEOUT = 120

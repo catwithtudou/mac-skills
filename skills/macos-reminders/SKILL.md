@@ -1,6 +1,6 @@
 ---
 name: macos-reminders
-description: Read and safely manage local Apple Reminders data on macOS using maccli osascript automation. Use when Codex needs to inspect reminder lists, list todos, search reminders, create reminders, update reminders, complete or uncomplete reminders, move reminders between lists, delete reminders, or troubleshoot Reminders permission access.
+description: Read and safely manage local Apple Reminders data on macOS using maccli osascript automation. Use when an AI agent needs to inspect reminder lists, list todos, search reminders, create reminders, update reminders, complete or uncomplete reminders, move reminders between lists, delete reminders, or troubleshoot Reminders permission access.
 ---
 
 # macOS Reminders
@@ -15,10 +15,10 @@ maccli reminders lists
 maccli reminders todos --list Personal --max 20
 ```
 
-If `maccli` is unavailable, use the bundled shim with the same subcommands:
+If `maccli` is unavailable, run the bundled shim from the installed `macos-reminders` skill directory:
 
 ```bash
-python3 "$HOME/.codex/skills/macos-reminders/scripts/read_reminders.py" lists
+python3 scripts/read_reminders.py lists
 ```
 
 ## Command Surface

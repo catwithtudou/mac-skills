@@ -1,6 +1,6 @@
 ---
 name: macos-notes
-description: Read and safely manage local Apple Notes data on macOS using the maccli notes command surface. Use when Codex needs to inspect Notes accounts or folders, search or read notes, create a note after confirmation, guarded-delete a note with explicit double confirmation, or troubleshoot Notes Automation permission access.
+description: Read and safely manage local Apple Notes data on macOS using the maccli notes command surface. Use when an AI agent needs to inspect Notes accounts or folders, search or read notes, create a note after confirmation, guarded-delete a note with explicit double confirmation, or troubleshoot Notes Automation permission access.
 ---
 
 # macOS Notes
