@@ -1,6 +1,6 @@
 ---
 name: macos-permissions
-version: 0.2.1
+version: 0.3.1
 description: Diagnose and explain macOS local app permissions for agent workflows, including TCC, Automation, Calendar, Reminders, Notes, Accessibility, and Full Disk Access. Use when an AI agent sees permission errors, authorization prompts, timeouts, empty-looking results that may be permission failures, or needs to explain safe recovery steps for macOS app access.
 ---
 
@@ -14,6 +14,14 @@ Use this skill when a macOS app workflow fails, times out, or returns suspicious
 maccli calendar doctor
 maccli reminders doctor --probe
 maccli notes doctor --probe
+```
+
+If `maccli` is not installed, use the npm CLI fallback:
+
+```bash
+npx -y mac-skills@0.3.1 calendar doctor
+npx -y mac-skills@0.3.1 reminders doctor --probe
+npx -y mac-skills@0.3.1 notes doctor --probe
 ```
 
 This skill does not grant permissions or modify System Settings. It explains what to check and how to report the failure.

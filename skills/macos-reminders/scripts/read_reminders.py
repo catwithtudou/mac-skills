@@ -1,38 +1,31 @@
 #!/usr/bin/env python3
-"""Compatibility shim for maccli reminders commands."""
+"""Launch maccli reminders from a local install or pinned npm fallback."""
 
 from __future__ import annotations
 
-import importlib.util
+import shutil
 import subprocess
 import sys
-from pathlib import Path
 
 
-PACKAGE_URL = "git+https://github.com/catwithtudou/mac-skills.git"
-
-
-def repo_src() -> Path:
-    return Path(__file__).resolve().parents[3] / "src"
+APP_NAME = "reminders"
+NPX_PACKAGE = "mac-skills@0.3.1"
 
 
 def run_maccli(args: list[str]) -> int:
-    src = repo_src()
-    if src.exists():
-        sys.path.insert(0, str(src))
-        from maccli.cli import main
+    maccli = shutil.which("maccli")
+    if maccli:
+        return subprocess.run([maccli, APP_NAME, *args], text=True).returncode
 
-        return main(["reminders", *args])
+    npx = shutil.which("npx")
+    if npx:
+        return subprocess.run([npx, "-y", NPX_PACKAGE, APP_NAME, *args], text=True).returncode
 
-    if importlib.util.find_spec("maccli") is None:
-        completed = subprocess.run(
-            [sys.executable, "-m", "pip", "install", "--user", PACKAGE_URL],
-            text=True,
-        )
-        if completed.returncode != 0:
-            return completed.returncode
-
-    return subprocess.run([sys.executable, "-m", "maccli", "reminders", *args], text=True).returncode
+    print(
+        "maccli was not found and npx is unavailable. Install with: npm install -g mac-skills",
+        file=sys.stderr,
+    )
+    return 127
 
 
 if __name__ == "__main__":

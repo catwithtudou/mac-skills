@@ -27,8 +27,11 @@ jobs:
         with:
           node-version: "24"
 
+      - name: Install npm package lock
+        run: npm ci
+
       - name: Check Python syntax
-        run: python -m compileall src scripts
+        run: python -m compileall src scripts skills
 
       - name: Run unit tests
         run: python -m unittest discover -s tests
@@ -42,6 +45,12 @@ jobs:
         run: python -m maccli --help
         env:
           PYTHONPATH: src
+
+      - name: Verify npm CLI wrapper
+        run: node bin/maccli.js --help
+
+      - name: Verify npm package contents
+        run: npm pack --dry-run
 
       - name: Verify skills packaging
         run: npx -y --registry=https://registry.npmjs.org skills@latest add ./ --list

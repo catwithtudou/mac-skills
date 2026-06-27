@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Launch maccli calendar from a local install or pinned npm fallback."""
+"""Launch maccli notes from a local install or pinned npm fallback."""
 
 from __future__ import annotations
 
@@ -8,7 +8,7 @@ import subprocess
 import sys
 
 
-APP_NAME = "calendar"
+APP_NAME = "notes"
 NPX_PACKAGE = "mac-skills@0.3.1"
 
 

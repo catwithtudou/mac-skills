@@ -6,6 +6,8 @@ This repository is a lightweight macOS skill collection for AI agents.
 
 - `README.md` explains the project scope, install path, and roadmap.
 - `.github/workflows/ci.yml` runs cross-platform validation on push and pull request.
+- `package.json` defines the npm-distributed `maccli` and `mac-skills` command entrypoints.
+- `bin/maccli.js` launches the Python `maccli` module from npm installs.
 - `src/maccli/` contains the shared Python CLI execution layer.
 - `scripts/validate_skills.py` validates skill folder structure for local checks and CI.
 - `skills/macos-calendar/` contains the Apple Calendar skill.
@@ -23,14 +25,17 @@ Add one directory per skill using lowercase hyphenated names, for example `skill
 Use these checks before submitting changes:
 
 - `git status --short` shows the files changed in the working tree.
-- `git diff -- README.md AGENTS.md pyproject.toml src/ skills/` reviews CLI, skill, and documentation edits.
+- `git diff -- README.md AGENTS.md package.json pyproject.toml bin/ src/ skills/` reviews CLI, skill, and documentation edits.
 - `git log --oneline -n 5` checks recent commit style.
+- `npm ci` installs the npm package lock for validation.
 - `python3 -m pip install -e .` installs the local `maccli` console command for development.
-- `python3 -m compileall src scripts` checks Python syntax.
+- `python3 -m compileall src scripts skills` checks Python syntax.
 - `python3 scripts/validate_skills.py skills` validates all skill folders.
-- `maccli --help` verifies the CLI entrypoint.
+- `node bin/maccli.js --help` verifies the npm CLI wrapper.
+- `maccli --help` verifies the installed CLI entrypoint when available.
 - `maccli calendar doctor` checks local macOS Calendar tooling.
 - `maccli reminders doctor --probe` checks local Reminders access.
+- `npm pack --dry-run` verifies the npm package contents.
 - `npx -y skills@latest add ./ --list` verifies that the skills CLI can discover packaged skills.
 
 When adding executable code, include the exact setup, build, lint, and test commands in `README.md` in the same change.

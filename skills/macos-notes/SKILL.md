@@ -1,21 +1,21 @@
 ---
 name: macos-notes
-version: 0.2.1
-description: Read and safely manage local Apple Notes data on macOS using the maccli notes command surface. Use when an AI agent needs to inspect Notes accounts or folders, search or read notes, create a note after confirmation, guarded-delete a note with explicit double confirmation, or troubleshoot Notes Automation permission access.
+version: 0.3.1
+description: Read and safely manage local Apple Notes data on macOS using a bundled launcher backed by local maccli or pinned npm fallback. Use when an AI agent needs to inspect Notes accounts or folders, search or read notes, create a note after confirmation, guarded-delete a note with explicit double confirmation, or troubleshoot Notes Automation permission access.
 ---
 
 # macOS Notes
 
 ## Quick Start
 
-Use this skill when the user wants to work with Apple Notes on macOS. Prefer the repository CLI because it keeps reads narrow and requires confirmation before writes:
+Use this skill when the user wants to work with Apple Notes on macOS. Prefer the bundled launcher because it keeps reads narrow, requires confirmation before writes, uses local `maccli` when available, and falls back to `npx -y mac-skills@0.3.1`. Run commands from this skill directory:
 
 ```bash
-maccli notes doctor --probe
-maccli notes accounts
-maccli notes folders --account "iCloud"
-maccli notes search "project"
-maccli notes note --note-id "NOTE_ID"
+python3 scripts/read_notes.py doctor --probe
+python3 scripts/read_notes.py accounts
+python3 scripts/read_notes.py folders --account "iCloud"
+python3 scripts/read_notes.py search "project"
+python3 scripts/read_notes.py note --note-id "NOTE_ID"
 ```
 
 Before treating a read as empty, check whether Notes or Automation permissions may have blocked access.
@@ -25,7 +25,7 @@ Before treating a read as empty, check whether Notes or Automation permissions m
 - Read: list accounts or folders, list notes in an explicit folder, search notes, read a selected note.
 - Write: create notes after `--confirm`; delete notes only after `--confirm --confirm-delete`.
 - Deferred: update and move are not default capabilities because Notes bodies are HTML-like content and move behavior needs write verification.
-- Fallbacks: prefer `maccli notes`, then Shortcuts or AppleScript. Use GUI automation only when the user explicitly accepts it and no better local interface is available.
+- Fallbacks: prefer `python3 scripts/read_notes.py`, then Shortcuts or AppleScript. Use GUI automation only when the user explicitly accepts it and no better local interface is available.
 
 Do not dump the full Notes library. Start with a narrow folder, account, title, or search query.
 
@@ -35,8 +35,8 @@ Do not dump the full Notes library. Start with a narrow folder, account, title, 
 2. Run the narrowest read needed to find candidate notes:
 
    ```bash
-   maccli notes search "launch" --max 10
-   maccli notes notes --account "iCloud" --folder "Notes" --max 10
+   python3 scripts/read_notes.py search "launch" --max 10
+   python3 scripts/read_notes.py notes --account "iCloud" --folder "Notes" --max 10
    ```
 
 3. If multiple notes match, show a short candidate list and ask the user to choose.
@@ -56,7 +56,7 @@ For create, show:
 Create only after confirmation:
 
 ```bash
-maccli notes create --account "iCloud" --folder "Notes" --title "Draft" --body "..." --confirm
+python3 scripts/read_notes.py create --account "iCloud" --folder "Notes" --title "Draft" --body "..." --confirm
 ```
 
 For delete, first read the target note and show:
@@ -69,7 +69,7 @@ For delete, first read the target note and show:
 Ask again before delete because it is destructive, then use both confirmation flags:
 
 ```bash
-maccli notes delete --note-id "NOTE_ID" --confirm --confirm-delete
+python3 scripts/read_notes.py delete --note-id "NOTE_ID" --confirm --confirm-delete
 ```
 
 For bulk writes, require a reviewed target list and explicit confirmation for that list.

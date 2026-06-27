@@ -1,6 +1,6 @@
 # mac-skills
 
-![mac-skills cover](assets/mac-skills-cover.png)
+![mac-skills cover](https://raw.githubusercontent.com/catwithtudou/mac-skills/main/assets/mac-skills-cover.png)
 
 Local-first macOS skills for AI coding agents.
 
@@ -26,17 +26,17 @@ AI agents are increasingly expected to interact with local apps, files, reminder
 
 | Skill | What it does | Execution layer | Safety model |
 |---|---|---|---|
-| `macos-calendar` | Read, create, update, and delete Apple Calendar events | Guarded Calendar wrapper via `maccli calendar` | Confirms writes and destructive actions |
-| `macos-reminders` | Read, create, update, complete, move, and delete Apple Reminders | Guarded `osascript` automation via `maccli reminders` | Confirms completion, move, delete, and bulk changes |
-| `macos-notes` | Read, search, create, and guarded-delete Apple Notes | Permission-aware `osascript` automation via `maccli notes` | Treats note deletion and broad access as high-risk |
+| `macos-calendar` | Read, create, update, and delete Apple Calendar events | Bundled launcher backed by local `maccli` or pinned npm fallback | Confirms writes and destructive actions |
+| `macos-reminders` | Read, create, update, complete, move, and delete Apple Reminders | Bundled launcher backed by local `maccli` or pinned npm fallback | Confirms completion, move, delete, and bulk changes |
+| `macos-notes` | Read, search, create, and guarded-delete Apple Notes | Bundled launcher backed by local `maccli` or pinned npm fallback | Treats note deletion and broad access as high-risk |
 | `macos-permissions` | Diagnose macOS permissions, TCC, Automation, and timeout issues | Local diagnostic guidance and probes | Prevents silent permission-related false results |
 
 ## Requirements
 
 - macOS.
 - Apple Calendar, Reminders, and Notes installed locally.
-- Node.js / `npx` for installing skills.
-- Python 3 for the optional `maccli` execution layer.
+- Node.js / `npx` for installing skills and using the npm CLI fallback.
+- Python 3 for the local execution layer.
 - macOS permissions for Calendar, Reminders, Notes, and Automation when required.
 
 Some operations may trigger macOS permission prompts. If access fails, use `$macos-permissions` or the relevant `maccli ... doctor` command to diagnose the issue.
@@ -93,7 +93,7 @@ For active development, a direct symlink into your agent's skill directory is al
 For reproducible installation, pin a release tag:
 
 ```bash
-npx -y skills@latest add https://github.com/catwithtudou/mac-skills.git#v0.2.0
+npx -y skills@latest add https://github.com/catwithtudou/mac-skills.git#v0.3.1
 ```
 
 Use this when you want a stable, repeatable setup instead of tracking the repository default branch.
@@ -108,24 +108,33 @@ npx -y skills@latest update
 
 ## Optional CLI: maccli
 
-This repository ships `maccli`, a small Python execution layer used by the skills.
+This repository ships `maccli`, a small local execution layer used by the skills.
 
-Most users should install the skills first. Use `maccli` directly when developing this repository, debugging permissions, or manually verifying the local execution layer.
+Installed skills include launchers under each skill's `scripts/` directory. They use a local `maccli` command when available and fall back to `npx -y mac-skills@0.3.1`, so users do not need to configure Python package entrypoints by hand.
 
-Install locally:
-
-```bash
-python3 -m pip install -e .
-```
-
-Run diagnostics:
+Run without installing:
 
 ```bash
-maccli --help
-maccli calendar doctor
-maccli reminders doctor --probe
-maccli notes doctor --probe
+npx -y mac-skills reminders doctor --probe
+npx -y mac-skills calendar calendars
+npx -y mac-skills notes search "project"
 ```
+
+Install globally:
+
+```bash
+npm install -g mac-skills
+maccli reminders lists
+```
+
+For local repository development:
+
+```bash
+node bin/maccli.js --help
+PYTHONPATH=src python3 -m maccli --help
+```
+
+Set `MACCLI_PYTHON=/path/to/python3` when the npm wrapper should use a specific Python interpreter.
 
 The current repository version includes:
 
@@ -133,7 +142,7 @@ The current repository version includes:
 - `macos-reminders`
 - `macos-notes`
 - `macos-permissions`
-- optional Calendar / Reminders / Notes execution support through `maccli`
+- npm-distributed Calendar / Reminders / Notes execution support through `maccli`
 
 ## Safety Principles
 
@@ -157,10 +166,13 @@ However, the AI agent or model provider you use may receive the context you choo
 Run these before publishing changes:
 
 ```bash
-python3 -m compileall src scripts
+npm ci
+python3 -m compileall src scripts skills
 PYTHONPATH=src python3 -m unittest discover -s tests
 python3 scripts/validate_skills.py skills
 PYTHONPATH=src python3 -m maccli --help
+node bin/maccli.js --help
+npm pack --dry-run
 npx -y --registry=https://registry.npmjs.org skills@latest add ./ --list
 ```
 

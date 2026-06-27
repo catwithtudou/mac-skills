@@ -1,0 +1,30 @@
+{
+  "name": "mac-skills",
+  "version": "0.3.1",
+  "description": "Local-first macOS skills and CLI for AI coding agents.",
+  "license": "MIT",
+  "bin": {
+    "maccli": "bin/maccli.js",
+    "mac-skills": "bin/maccli.js"
+  },
+  "files": [
+    "assets/mac-skills-cover.png",
+    "bin/maccli.js",
+    "src/maccli/*.py",
+    "skills/*/SKILL.md",
+    "skills/*/agents/*.yaml",
+    "skills/*/scripts/*.py",
+    "scripts/validate_skills.py",
+    "README.md",
+    "LICENSE",
+    "pyproject.toml"
+  ],
+  "scripts": {
+    "check": "python3 -m compileall src scripts skills && PYTHONPATH=src python3 -m unittest discover -s tests && python3 scripts/validate_skills.py skills",
+    "test": "PYTHONPATH=src python3 -m unittest discover -s tests",
+    "pack:dry-run": "npm pack --dry-run"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
